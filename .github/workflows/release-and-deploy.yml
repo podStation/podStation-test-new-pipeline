@@ -1,0 +1,18 @@
+on:
+  push: 
+    branches:
+      - master
+jobs:
+  test-and-build:
+    uses: ./.github/workflows/test-and-build.yml
+  check-new-version:
+    name: Checks if a new version was created with the last commit, then creates a check-new-version-create-release
+    needs: [ test-and-build ]
+    steps:
+      - run: echo "Testing"
+#  deploy:
+#    name: Check if it is a new version and deploy to the Chrome Web Store
+#    needs: [ test-and-build ]
+#    steps:
+#      - 
+    
