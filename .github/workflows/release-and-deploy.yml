@@ -8,6 +8,7 @@ jobs:
   check-new-version:
     name: Checks if a new version was created with the last commit, then creates a check-new-version-create-release
     needs: [ test-and-build ]
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Testing"
 #  deploy:
