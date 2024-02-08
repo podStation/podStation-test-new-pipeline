@@ -10,6 +10,7 @@ jobs:
     needs: [ test-and-build ]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Check if the version has changed
         run: ./check_version_has_changed.sh
       - name: just testing
