@@ -5,12 +5,15 @@ on:
 jobs:
   test-and-build:
     uses: ./.github/workflows/test-and-build.yml
-  check-new-version:
+  check-new-version-and-release:
     name: Checks if a new version was created with the last commit, then creates a check-new-version-create-release
     needs: [ test-and-build ]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Testing"
+      - name: Check if the version has changed
+        run: ./check_version_has_changed.sh
+      - name: just testing
+        run: echo "$VERSION_HAS_CHANGED"
 #  deploy:
 #    name: Check if it is a new version and deploy to the Chrome Web Store
 #    needs: [ test-and-build ]
