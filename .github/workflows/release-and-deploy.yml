@@ -15,6 +15,7 @@ jobs:
         run: ./check_version_has_changed.sh
       - name: just testing
         run: echo "$VERSION_HAS_CHANGED"
+      
 #  deploy:
 #    name: Check if it is a new version and deploy to the Chrome Web Store
 #    needs: [ test-and-build ]
