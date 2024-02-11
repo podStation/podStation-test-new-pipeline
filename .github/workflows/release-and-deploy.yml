@@ -10,8 +10,8 @@ jobs:
     needs: [ test-and-build ]
     runs-on: ubuntu-latest
     outputs:
-      version_has_changed: ${{ steps.set-output.outputs.version_has_changed }}
-      next_version_tag: ${{ steps.set-output.outputs.next_version_tag }}
+      version_has_changed: ${{ steps.check-new-version-step.outputs.version_has_changed }}
+      next_version_tag: ${{ steps.check-new-version-step.outputs.next_version_tag }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,14 +19,20 @@ jobs:
           ## See https://github.com/actions/checkout/issues/1471
           fetch-depth: 0
           filter: tree:0
-      - name: Check if the version has changed
-        run: ./check_version_has_changed.sh
-      - id: set-output
-        run: |
+      - id: check-new-version-step
+        name: Check if the version has changed
+        run: | 
+          ./check_version_has_changed.sh
           echo "version_has_changed=$VERSION_HAS_CHANGED"
           echo "next_version_tag=$NEXT_VERSION_TAG"
           echo "version_has_changed=$VERSION_HAS_CHANGED" >> $GITHUB_OUTPUT
           echo "next_version_tag=$NEXT_VERSION_TAG" >> $GITHUB_OUTPUT
+      # - id: set-output
+      #   run: |
+      #     echo "version_has_changed=$VERSION_HAS_CHANGED"
+      #     echo "next_version_tag=$NEXT_VERSION_TAG"
+      #     echo "version_has_changed=$VERSION_HAS_CHANGED" >> $GITHUB_OUTPUT
+      #     echo "next_version_tag=$NEXT_VERSION_TAG" >> $GITHUB_OUTPUT
   create-zip-tag-and-release:
     name: Create zip file, tag the repository and create release
     needs: [check-new-version]
