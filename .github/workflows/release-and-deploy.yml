@@ -22,7 +22,7 @@ jobs:
       - id: check-new-version-step
         name: Check if the version has changed
         run: | 
-          ./check_version_has_changed.sh
+          source ./check_version_has_changed.sh
           echo "version_has_changed=$VERSION_HAS_CHANGED"
           echo "next_version_tag=$NEXT_VERSION_TAG"
           echo "version_has_changed=$VERSION_HAS_CHANGED" >> $GITHUB_OUTPUT
