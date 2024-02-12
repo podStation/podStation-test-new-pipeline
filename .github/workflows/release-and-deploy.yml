@@ -50,6 +50,8 @@ jobs:
           name: compressed-build-artifact
           path: build_output/output.zip
       - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
         ## This step is needed for tagging the repository
         ## The tag is used to check if a new release and deployment is needed.
         ## Docu for the command below: https://cli.github.com/manual/gh_release_create
