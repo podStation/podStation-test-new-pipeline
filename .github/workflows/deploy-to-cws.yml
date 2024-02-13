@@ -15,5 +15,6 @@ jobs:
         run: |
           mkdir build_output
           gh release download --pattern output.zip --output build_output/output.zip
+      - run: npm install --only=dev
       - name: Deploy to Chrome Web Store
         run: npm run release
