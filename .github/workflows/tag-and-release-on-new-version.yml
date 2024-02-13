@@ -1,7 +1,9 @@
 on:
   workflow_call:
     outputs:
-      version_has_changed: ${{ jobs.check-new-version.outputs.version_has_changed }}
+      version_has_changed:
+        description: Set to 1 if the version has changed in comparison with the last tag 
+        value: ${{ jobs.check-new-version.outputs.version_has_changed }}
   workflow_dispatch:
 jobs:
   test-and-build:
