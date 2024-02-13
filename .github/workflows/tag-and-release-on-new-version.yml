@@ -1,5 +1,8 @@
 on:
-  [workflow_call, workflow_dispatch]
+  workflow_call:
+    outputs:
+      version_has_changed: ${{ jobs.check-new-version.outputs.version_has_changed }}
+  workflow_dispatch:
 jobs:
   test-and-build:
     uses: ./.github/workflows/test-and-build.yml
